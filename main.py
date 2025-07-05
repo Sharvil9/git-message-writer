@@ -16,13 +16,22 @@ def create_commits_for_date(numCommits: int, date: datetime):
     for _ in range(numCommits):
         create_commit(date)
 
-def get_start_date():
+#def get_start_date():
     # for instance - from Weds oct. 30 2024, start is Monday Oct 29 2023
     # get most recent Monday
-    today = datetime.today()
-    monday = today - timedelta(days=today.weekday())
-    start_date = monday - timedelta(weeks=52, days=1) # hahA GOOD LUCK IF THIS IS NOT A LEAP YEAR :)
-    return start_date
+    #today = datetime.today()
+    #monday = today - timedelta(days=today.weekday())
+    #start_date = monday - timedelta(weeks=52, days=1) # hahA GOOD LUCK IF THIS IS NOT A LEAP YEAR :)
+    #return start_date
+
+def get_start_date():
+    # Start from the first Monday of 2003
+    year = 2003
+    start_date = datetime(year, 1, 1)
+    # Find the first Monday of 2003
+    while start_date.weekday() != 0:  # 0 is Monday
+        start_date += timedelta(days=1)
+    return start_date    
 
 def read_image(img_name):
     im = Image.open(img_name).convert('L')
